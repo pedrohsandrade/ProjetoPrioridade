@@ -2,31 +2,50 @@
 # Por pedrohsandrade
 # -*- coding: utf-8 -*-
 
-import sqlite3
-conn = sqlite3.connect("mydatabase.db")
-cursor=conn.cursor()
+from definebanco import cursor, conn, sqlite3
+
 
 class Model(object):
-    def cadastro(self, item, indice1, indice2, indice3):
+    def cadastraritem(self, item, indice1, indice2, indice3):
         try:
-            valores = [item, indice1, indice2, indice2]
-            sql = 'INSERT INTO projeto VALUES (?,?,?,?)'
-            cursor.execute(sql,valores)
+            subsql = "INSERT INTO tabela (item, indice1, indice2, indice3) VALUES ('{}', '{}', '{}', '{}')"
+            sql = subsql.format(item, indice1, indice2, indice3)
+            cursor.execute(sql)
             conn.commit()
-        except:
-            print ("Deu ruim")
-    def excluirtabela (self):
+            print("Item Cadastrado\n")
+        except sqlite3.OperationalError:
+            print("Você precisa de uma tabela\n")
+        input()
+
+    def criartabela(self):
         try:
-            cursor.execute ("DROP TABLE IF EXISTS projeto")
-        except:
-            print("Deu ruim")
-    def lertabela (self):
+            cursor.execute("""CREATE TABLE tabela (id INTEGER PRIMARY KEY, item TEXT,indice1 INTERGER,
+                          indice2 INTERGER, indice3 INTERGER)
+                      """)
+            conn.commit()
+            print ("Tabela criada\n")
+        except sqlite3.OperationalError:
+            print("Tabela ja existe\n")
+        input()
+
+    def excluirtabela(self):
         try:
-            cursor.execute("""
-            SELECT * FROM projeto;
-            """)
-            for linha in cursor.fetchall():
-                print(linha)
-            conn.close()
-        except:
-            print("Deu ruim")
+            cursor.execute("DROP TABLE tabela")
+            print("Tabela excluida\n")
+        except sqlite3.OperationalError:
+           print("Não existe tabela para ser excluída")
+        input()
+
+    def lertabela(self):
+        try:
+            cursor.execute("SELECT * FROM tabela ")
+            while True:
+                row = cursor.fetchone()
+                if row == None:
+                    break
+
+                print(row[0], row[1], row[2], row[3], row[4])
+            print("\n")
+        except sqlite3.OperationalError:
+            print("Tabela nao existe")
+        input()
