@@ -26,9 +26,6 @@ class Projeto:
             self.Model.cadastraritem(item, indice1, indice2, indice3)
         elif opcao == 3:
             self.Model.lertabela()
-#            retorno = self.View.retorno()
-#            while retorno != 's':
-#                retorno = self.View.retorno()
         elif opcao == 9:
             self.Model.excluirtabela()
 
