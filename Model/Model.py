@@ -15,7 +15,47 @@ class Model(object):
             print("Item Cadastrado\n")
         except sqlite3.OperationalError:
             print("Você precisa de uma tabela\n")
-        input()
+        input("Aperte qualquer tecla para prosseguir")
+
+    def atualizaitem(self,item,id):
+        try:
+            atualizar = (item,id)
+            cursor.execute("UPDATE tabela SET item=? WHERE id=?",atualizar)
+            conn.commit
+            print("Tarefa atualizada com sucesso")
+        except sqlite3.OperationalError:
+            print('\033[31m'+'Não foi possível atualizar o item'+'\033[0;0m')
+        input("Aperte qualquer tecla para prosseguir")
+
+    def atualizaindice1(self,indice1,id):
+        try:
+            atualizar = (indice1,id)
+            cursor.execute("UPDATE tabela SET indice1=? WHERE id=?",atualizar)
+            conn.commit
+            print("Indice1 da tarefa atualizado com sucesso")
+        except sqlite3.OperationalError:
+            print('\033[31m'+'Não foi possível atualizar o indice1 da tarefa'+'\033[0;0m')
+        input("Aperte qualquer tecla para prosseguir")
+
+    def atualizaindice2(self, indice2, id):
+        try:
+            atualizar = (indice2,id)
+            cursor.execute("UPDATE tabela SET indice2=? WHERE id=?",atualizar)
+            conn.commit
+            print("Indice2 da tarefa atualizado com sucesso")
+        except sqlite3.OperationalError:
+            print('\033[31m'+'Não foi possível atualizar o indice2 da tarefa'+'\033[0;0m')
+        input("Aperte qualquer tecla para prosseguir")
+
+    def atualizaindice3(self, indice3, id):
+        try:
+            atualizar = (indice3,id)
+            cursor.execute("UPDATE tabela SET indice3=? WHERE id=?",atualizar)
+            conn.commit
+            print("Indice3 da tarefa atualizado com sucesso")
+        except sqlite3.OperationalError:
+            print('\033[31m'+'Não foi possível atualizar o indice3 da tarefa'+'\033[0;0m')
+        input("Aperte qualquer tecla para prosseguir")
 
     def criartabela(self):
         try:
@@ -34,7 +74,7 @@ class Model(object):
             print("Tabela excluida\n")
         except sqlite3.OperationalError:
            print("Não existe tabela para ser excluída")
-        input()
+        input("Aperte qualquer tecla para prosseguir")
 
     def lertabela(self):
         try:
@@ -48,4 +88,4 @@ class Model(object):
             print("\n")
         except sqlite3.OperationalError:
             print("Tabela nao existe")
-        input()
+        input("Aperte qualquer tecla para prosseguir")
