@@ -19,14 +19,25 @@ class Projeto:
     def item(self, opcao):
         if opcao == 1:
             self.Model.criartabela()
+
         elif opcao == 2:
             item, indice1, indice2, indice3 = self.View.getItem()
             self.Model.cadastraritem(item, indice1, indice2, indice3)
+
         elif opcao == 3:
             self.Model.lertabela()
+
         elif opcao == 4:
             opcao2 = self.View.getopcao2()
             self.atualiza(opcao2)
+
+        elif opcao == 5:
+            id = self.View.getId()
+            self.Model.deletaitem(id)
+
+        elif opcao == 6:
+            self.Model.exibirprioridade()
+
         elif opcao == 9:
             self.Model.excluirtabela()
 

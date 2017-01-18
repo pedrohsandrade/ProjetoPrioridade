@@ -13,6 +13,8 @@ class View:
         print("2 - Cadastrar item")
         print("3 - Visualizar lista")
         print("4 - Atualizar item")
+        print("5 - Deletar item")
+        print("6 - Exibe Lista por Prioridade")
         print("9 - Excluir tabela")
         print("0 - Finalizar")
         return int(input("\nDigite a opção: "))
