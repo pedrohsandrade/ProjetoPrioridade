@@ -35,7 +35,7 @@ class Model(object):
             conn.commit()
             print("Item Cadastrado\n")
         except sqlite3.OperationalError:
-            print("Você precisa de uma tabela\n")
+            print('\033[31m' + 'Você precisa de uma tabela' + '\033[0;0m')
         input("Aperte qualquer tecla para prosseguir")
 
     def atualizaitem(self,item,id):
@@ -102,14 +102,15 @@ class Model(object):
         input("Aperte qualquer tecla para prosseguir")
 
     def exibirprioridade(self):
+        cursor.execute("SELECT item, (indice1*1) + (indice2*2) + (indice3*3) AS 'a.ordem' FROM tabela "
+                       "ORDER BY 'a.ordem' ASC")
         try:
-            cursor.execute("SELECT *, (indice1*1) + (indice2*2) + (indice3*3) FROM tabela")
             while True:
                 row = cursor.fetchone()
                 if row is None:
                     break
                 separador = ':'
-                print(row[0], separador, row[1],separador, row[2], separador, row[3], separador, row[4])
+                print(row[0], separador, row[1])
             print("\n")
         except sqlite3.OperationalError:
             print("Tabela nao existe")
