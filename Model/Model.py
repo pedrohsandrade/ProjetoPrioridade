@@ -102,16 +102,19 @@ class Model(object):
         input("Aperte qualquer tecla para prosseguir")
 
     def exibirprioridade(self):
-        cursor.execute("SELECT item, (indice1*1) + (indice2*2) + (indice3*3) AS 'a.ordem' FROM tabela "
-                       "ORDER BY 'a.ordem' ASC")
+        cursor.execute("SELECT item,(indice1*1) + (indice2*2) + (indice3*3) FROM tabela ORDER BY 2 DESC")
+        row = cursor.fetchone()
+        a = row[0]
+        b = row[1]
+        print('Sua tarefa de maior prioridade é', a, 'com pontuação de', b)
         try:
             while True:
                 row = cursor.fetchone()
                 if row is None:
                     break
-                separador = ':'
-                print(row[0], separador, row[1])
+                print(row[0], ':', row[1])
             print("\n")
+
         except sqlite3.OperationalError:
             print("Tabela nao existe")
         input("Aperte qualquer tecla para prosseguir")
